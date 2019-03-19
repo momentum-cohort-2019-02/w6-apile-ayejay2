@@ -37,3 +37,10 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post-detail', args=[str(self.slug)])
+
+class Comment(models.Model):
+    """Model representing Comments on a Post"""
+
+    post = models.ForeignKey(to=Post, related_name='comments', on_delete=models.CASCADE)
+    text = models.TextField()
+    created_at = models.DateTimeField(null=True, auto_now_add=True)
