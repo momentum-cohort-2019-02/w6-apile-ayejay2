@@ -130,3 +130,5 @@ STATIC_URL = '/static/'
 
 #for django-registration-redux
 ACCOUNT_ACTIVATION_DAYS = 7
+LOGIN_REDIRECT_URL = '/'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
