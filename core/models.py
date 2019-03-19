@@ -2,6 +2,7 @@ from django.db import models
 import datetime
 from django.utils.text import slugify
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -37,3 +38,9 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post-detail', args=[str(self.slug)])
+
+class Vote(models.Model):
+    """Model representing a vote."""
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    voted_at = models.DateTimeField(auto_now_add=True)
