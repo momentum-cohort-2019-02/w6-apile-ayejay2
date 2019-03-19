@@ -10,3 +10,4 @@ class PostAdmin(admin.ModelAdmin):
         'url',
     )
     exclude = ('slug',)
+    
