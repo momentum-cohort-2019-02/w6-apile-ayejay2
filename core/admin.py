@@ -13,6 +13,7 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
+    """Class that creates the way Comment info is displayed in Admin. Calls on Comment Model"""
     list_display = (
         'post', 
         'created_at',
