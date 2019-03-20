@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p><a href="{% url 'post_detail' post.title.pk %}">{ post.title }}</a></p>
+
+<p>posted on: {{ post.posted_on }}</p>
+
+<p>Comments: post.comment {{ post.comment }}</p>
+
+<p>Comments: comment.post {{ comment.post }}</p>
+
+{% endblock %}
