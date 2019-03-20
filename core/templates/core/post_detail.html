@@ -2,12 +2,17 @@
 
 {% block content %}
 
-<p><a href="{% url 'post_detail' post.title.pk %}">{{ post.title }}</a></p>
+<p>{{ post.title }}</p>
 
 <p>posted on: {{ post.posted_on }}</p>
 
-<p>Comments: post.comment {{ post.comment }}</p>
+{% if post.comments.count %}
 
-<p>Comments: comment.post {{ comment.post }}</p>
+    {% for comment in post.comments.all %}
+    <p>Comments: {{ comment.text }}</p>
+    {% endfor %}
+
+{% endif %}
+
 
 {% endblock %}

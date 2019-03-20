@@ -17,8 +17,8 @@ def index(request):
     }
     return render(request, 'index.html', context=context)
 
-# class PostDetailView(generic.DetailView):
-#     model = Post
+class PostDetailView(generic.DetailView):
+    model = Post
     
     
     
@@ -29,6 +29,6 @@ def index(request):
 #         'posts': posts,
 #     }
 
-#     return render(request, 'post_detail', context=context)
+#     return render(request, 'post-detail', context=context)
     
 
