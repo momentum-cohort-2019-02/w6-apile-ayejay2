@@ -15,5 +15,6 @@ class PostAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = (
         'post', 
-        'created_at'
+        'created_at',
+        'text',
         )
