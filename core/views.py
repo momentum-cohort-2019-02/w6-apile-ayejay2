@@ -9,7 +9,7 @@ def index(request):
     votes = Vote.objects.all()
     context = {
         'posts': posts,
-        'comments': comment,
+        'comments': comments,
         'votes': votes,
     }
     return render(request, 'index.html', context=context)
