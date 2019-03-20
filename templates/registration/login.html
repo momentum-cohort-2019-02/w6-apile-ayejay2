@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+<!-- required information: form, next-->
+{% block title %}Log in{% endblock %}
+{% block content %}
+<form method="POST" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Log in"/>
+    <input type="hidden" value="{{ next }}"/>
+</form>
+<p>Shoot, what was my password again?<a href="{% url 'auth_password_rest' %}">Reset it</a>!</p>
+<p>Want to become a member?<a href="{% url 'registration_register' %}">Become a member</a>!</p>
+
+{% endblock %}
