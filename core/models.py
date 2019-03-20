@@ -47,6 +47,9 @@ class Comment(models.Model):
     text = models.TextField()
     created_at = models.DateTimeField(null=True, auto_now_add=True)
 
+    def __str__(self):
+        return self.text
+
 class Vote(models.Model):
     """Model representing a vote."""
     user = models.ForeignKey(User, on_delete=models.CASCADE)

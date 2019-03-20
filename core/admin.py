@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import Post
+from core.models import Post, Comment
 # Register your models here.
 
 @admin.register(Post)
@@ -10,3 +10,12 @@ class PostAdmin(admin.ModelAdmin):
         'url',
     )
     exclude = ('slug',)
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    """Class that creates the way Comment info is displayed in Admin. Calls on Comment Model"""
+    list_display = (
+        'post', 
+        'created_at',
+        'text',
+        )
