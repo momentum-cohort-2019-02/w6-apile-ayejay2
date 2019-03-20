@@ -9,10 +9,11 @@
     list-style: none;
     display: flex;
     flex-direction: column;
+    width: 75%;
 }
 
 .post-items{
     display: flex;
     flex-direction: row;
-    align-content: space-between;
+    justify-content: space-between;
 }
