@@ -4,10 +4,8 @@ from django.views.generic import View
 
 # Create your views here.
 def index(request):
+    posts = Post.objects.all()
     context = {
-        'post': post,
-        
-
+        'posts': posts,
     }
-
     return render(request, 'index.html', context=context)
