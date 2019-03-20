@@ -4,3 +4,16 @@
     list-style: none;
     border-right: solid 2px rgb(141, 138, 138);
 }
+
+.post{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+}
+
+.post-items{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
