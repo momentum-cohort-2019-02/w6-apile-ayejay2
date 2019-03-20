@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<p><a href="{% url 'post_detail' post.title.pk %}">{ post.title }}</a></p>
+<p><a href="{% url 'post_detail' post.title.pk %}">{{ post.title }}</a></p>
 
 <p>posted on: {{ post.posted_on }}</p>
 
