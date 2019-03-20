@@ -1,2 +1,7 @@
 {% extends "base.html" %}
 <!-- required information: form, next-->
+{% block content %}
+<form></form>
+{% form.as_p %}
+{% next %}
+{% endblock %}
