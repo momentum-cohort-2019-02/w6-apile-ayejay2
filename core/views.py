@@ -5,6 +5,8 @@ from django.views.generic import View
 # Create your views here.
 def index(request):
     context = {
+        'post': post,
+        
 
     }
 
