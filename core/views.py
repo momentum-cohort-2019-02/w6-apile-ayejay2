@@ -3,6 +3,9 @@ from core.models import Post, Comment, Vote
 from django.views.generic import View
 from django.views import generic
 from django.http import HttpResponseRedirect
+from django.contrib import messages
+from django.views.decorators.http import require_http_methods
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -32,3 +35,25 @@ class PostDetailView(generic.DetailView):
 #     return render(request, 'post-detail', context=context)
     
 
+
+
+
+
+
+
+
+
+
+@require_http_methods(['POST'])
+@login_required
+def post_vote_view(request, post_pk):
+    post = get_object_or_404(Post, pk=post_pk)
+
+    vote, created = request.user.vote_set.get_or_create(post=post)
+
+    if created:
+        messages.success(request, f"You have voted for {post.title}.")
+    else:
+        messages.info(request, f"You have redacted your vote for {post.title}.")
+        vote.delete()
+    return redirect('index.html')
