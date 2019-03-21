@@ -9,7 +9,7 @@
 {% if post.comments.count %}
 
     {% for comment in post.comments.all %}
-    <p>Posted by: {{ user }}</p>
+    <p>Posted by: {{ comment.posted_by }}</p>
     <p>Comments: {{ comment.text }}</p>
     {% endfor %}
 

@@ -46,6 +46,7 @@ class Comment(models.Model):
     post = models.ForeignKey(to=Post, related_name='comments', on_delete=models.CASCADE)
     text = models.TextField()
     created_at = models.DateTimeField(null=True, auto_now_add=True)
+    posted_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments', default=1)
 
     def __str__(self):
         return self.text
