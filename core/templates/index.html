@@ -25,7 +25,7 @@
                         <li class="post-item"><a href="{{ post.get_absolute_url }}">Comment</a></li>
                         <li class="post-item">
                             {% if request.user.is_authenticated %}
-                                <form action="{% url 'index' %}" method="POST">
+                                <form action="{% url 'vote_posts' slug=post.slug %}" method="POST">
                                     {% csrf_token %}
                                         {% if post in request.user.vote_posts.all %}
                                             <button type="submit" class="btn btn-fail">

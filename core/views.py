@@ -46,14 +46,14 @@ class PostDetailView(generic.DetailView):
 
 @require_http_methods(['POST'])
 @login_required
-def post_vote_view(request, post_pk):
-    post = get_object_or_404(Post, pk=post_pk)
+def post_vote_view(request, slug):
+    post = get_object_or_404(Post, slug=slug)
 
     vote, created = request.user.vote_set.get_or_create(post=post)
-
+    next = request.POST.get('next', '/')
     if created:
         messages.success(request, f"You have voted for {post.title}.")
     else:
         messages.info(request, f"You have redacted your vote for {post.title}.")
         vote.delete()
-    return redirect('index.html')
+    return HttpResponseRedirect(next)
