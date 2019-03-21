@@ -3,6 +3,9 @@ from core.models import Post, Comment, Vote
 from django.views.generic import View
 from django.views import generic
 from django.http import HttpResponseRedirect
+from django.contrib import messages
+from django.views.decorators.http import require_http_methods
+from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -40,5 +43,19 @@ def create_comment(request):
     else:
         form = CommentForm()
     return render(request, 'post_detail.html', {'form': form})
+### TODO: In Production ------------------------------> ^^^^^
 
-### TODO: In Production ------------------------------>
+@require_http_methods(['POST'])
+@login_required
+def post_vote_view(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+
+    vote, created = request.user.vote_set.get_or_create(post=post)
+    next = request.POST.get('next', '/')
+    if created:
+        messages.success(request, f"You have voted for {post.title}.")
+    else:
+        messages.info(request, f"You have redacted your vote for {post.title}.")
+        vote.delete()
+    return HttpResponseRedirect(next)
+

@@ -11,14 +11,20 @@ class Post(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
     url = models.URLField(max_length=255)
     posted_on = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    #there are many users who will have many votes
+    #go to User 
+    voted_by = models.ManyToManyField(to=User, related_name='vote_posts', through='Vote')
+
 
     class Meta:
         ordering = ['-posted_on']
     
+
     def save(self, *args, **kwargs):
         self.set_slug()
         super().save(*args, **kwargs)
     
+
     def set_slug(self):
         if self.slug:
             return
@@ -33,8 +39,10 @@ class Post(models.Model):
         
         self.slug = slug
     
+
     def __str__(self):
         return str(self.title)
+
 
     def get_absolute_url(self):
         return reverse('post-detail', args=[str(self.slug)])
@@ -48,12 +56,13 @@ class Comment(models.Model):
     created_at = models.DateTimeField(null=True, auto_now_add=True)
     posted_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments', default=1)
 
+
     def __str__(self):
         return self.text
+
 
 class Vote(models.Model):
     """Model representing a vote."""
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     voted_at = models.DateTimeField(auto_now_add=True)
-
