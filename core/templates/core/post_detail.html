@@ -9,11 +9,26 @@
 {% if post.comments.count %}
 
     {% for comment in post.comments.all %}
-    <p>Posted by: {{ user }}</p>
-    <p>Comments: {{ comment.text }}</p>
+    <p>Posted by: {{ comment.posted_by }}<br>
+        Comments: {{ comment.text }}</p>
     {% endfor %}
 
 {% endif %}
+
+
+{% if request.user.is_authenticated %}
+    <h2>Comment:</h2>
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+
+        
+            <button type="submit"><i class="fa fa-fort-awesome"></i> Submit</button>
+        
+    </form>
+{% endif %}
+
 
 
 {% endblock %}
