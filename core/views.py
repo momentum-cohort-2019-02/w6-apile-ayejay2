@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
-
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.http import require_http_methods
@@ -58,4 +58,3 @@ def post_vote_view(request, slug):
         messages.info(request, f"You have redacted your vote for {post.title}.")
         vote.delete()
     return HttpResponseRedirect(next)
-
