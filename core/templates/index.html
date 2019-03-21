@@ -28,7 +28,8 @@
                                 <form action="{% url 'index' %}" method="POST">
                                     {% csrf_token %}
                                         {% if post in request.user.vote_posts.all %}
-                                            <button type="submit" class="btn btn-fail"> Unvote</button>
+                                            <button type="submit" class="btn btn-fail">
+                                            Unvote</button>
                                         {% else %}
                                             <button type="submit" class="btn btn-success">Vote</button>
                                         {% endif %}
