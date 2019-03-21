@@ -23,7 +23,18 @@
                     </div>
                     <div class="post-items">
                         <li class="post-item"><a href="{{ post.get_absolute_url }}">Comment</a></li>
-                        <li class="post-item"><button>Vote here</button></li>
+                        <li class="post-item">
+                            {% if request.user.is_authenticated %}
+                                <form action="{% url 'index' %}" method="POST">
+                                    {% csrf_token %}
+                                        {% if post in request.user.vote_posts.all %}
+                                            <button type="submit" class="btn btn-fail"> Unvote</button>
+                                        {% else %}
+                                            <button type="submit" class="btn btn-success">Vote</button>
+                                        {% endif %}
+                                </form>
+                            {% endif %}
+                        </li>
                     </div>
                 </ul>
             </div>
