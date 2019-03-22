@@ -4,7 +4,7 @@
 <h2>New example of art</h2>
     <form method="POST" class="post-form">
         {% csrf_token %}
-            {% form.as_p %}
+            {{ form.as_p }}
             <button type="submit" class="save btn btn-default">Submit art exmple</button>
     </form>
 {% endblock %}

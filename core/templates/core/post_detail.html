@@ -3,8 +3,13 @@
 {% block content %}
 
 <p>{{ post.title }}<br>
-    Image Url:<img src="{{ post.image_url }}"><br>
-{{ post.description }}</p>
+    {{ post.posted_by }}<br>
+    Image Url:
+    {% if post.image_url %}
+    <img src="{{ post.image_url }}"><br>
+    {% endif %}</p>
+    
+    <p>{{ post.description }}</p>
 
 <p>posted on: {{ post.posted_on }}</p>
 

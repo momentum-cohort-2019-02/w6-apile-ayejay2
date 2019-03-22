@@ -20,6 +20,7 @@ class Post(models.Model):
     #there are many users who will have many votes
     #go to User 
     voted_by = models.ManyToManyField(to=User, related_name='vote_posts', through='Vote')
+    posted_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts', default=1)
 
 
     class Meta:
