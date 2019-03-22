@@ -1,6 +1,7 @@
 from django import forms
 from core.models import Post, Comment
 
+
 class CommentForm(forms.ModelForm):
 
     class Meta:
@@ -9,6 +10,7 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'text': forms.TextInput(attrs={'style': 'width: 400px'}),
         }
+
 
 class PostForm(forms.ModelForm):
 
