@@ -11,9 +11,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.http import require_http_methods
 from core.forms import CommentForm, PostForm
-
+from django.contrib.auth.models import User
 from .forms import CommentForm
-
+from django.utils.text import slugify
 # Create your views here.
 def index(request):
 
@@ -53,6 +53,7 @@ def post_vote_view(request, slug):
 
     vote, created = request.user.vote_set.get_or_create(post=post)
     next = request.POST.get('next', '/')
+    
     if created:
         messages.success(request, f"You have voted for {post.title}.")
     else:
@@ -63,5 +64,11 @@ def post_vote_view(request, slug):
 @require_http_methods(['POST'])
 @login_required
 def post_new(request):
-    form = PostForm()
-    return render(request, 'post_new.html', {})
+    if request.method == "POST":
+        post = form.save(commit=False)
+        post.voted_by = request.User
+        post.slug = slugify('title')
+        post.posted_on = timezone.now()
+    else:
+        form = PostForm(request.POST)
+    return render(request, 'post_new.html', {'form': form})
