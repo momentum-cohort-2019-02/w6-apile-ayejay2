@@ -2,13 +2,16 @@
 
 {% block content %}
 
-<p>{{ post.title }}</p>
+<p>{{ post.title }}<br>
+    Image Url:<img src="{{ post.image_url }}"><br>
+{{ post.description }}</p>
 
 <p>posted on: {{ post.posted_on }}</p>
 
 {% if post.comments.count %}
 
     {% for comment in post.comments.all %}
+    
     <p>Posted by: {{ comment.posted_by }}<br>
         Comments: {{ comment.text }}</p>
     {% endfor %}

@@ -9,7 +9,6 @@ class PostAdmin(admin.ModelAdmin):
         'posted_on',
         'url',
         'image_url',
-        'image_file'
     )
     exclude = ('slug',)
 

@@ -15,7 +15,7 @@ class Post(models.Model):
     url = models.URLField(max_length=255)
     posted_on = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     description = models.CharField(max_length=255, null=True)
-    image_file = models.ImageField(upload_to='images', null=True)
+    image_file = models.ImageField(upload_to='images', null=True, blank=True)
     image_url = models.URLField(null=True, blank=True)
     #there are many users who will have many votes
     #go to User 
@@ -59,9 +59,9 @@ class Post(models.Model):
             result = urllib.urlretreive(self.image_url)
             self.image_file.save(
                 os.path.basename(self.image_url),
-                Fil(open(result[0]))
+                File(open(result[0], 'rb'))
             )
-        self.save(0)
+        self.save()
 
 
 class Comment(models.Model):
