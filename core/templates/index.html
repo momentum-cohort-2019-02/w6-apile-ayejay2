@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <h1>DataDriven and Generative Art</h1>
+    
 
     <p> Welcome to DataDriven and Generative Art, a website developed by Robots!</p>
 
@@ -10,41 +10,43 @@
 
     <p>Help us learn about art by making posts about the best examples of data driven and generative art that you human can find!</p>
 
-    <h2>Posts by humans:</h2>
-    <div class="post-section">
-        {% if posts %}
-        <div class="posts">
-            {% for post in posts %}
-            <div class="individual-post">
-                <ul class="post">
-                    <div class="post-items">
-                        <li class="post-item"><strong><a href="{{ post.url }}">{{ post.title }}</a></strong></li>
-                        <li class="post-item">{{ post.posted_on }}</li>
-                    </div>
-                    <div class="post-items">
-                        <li class="post-item"><a href="{{ post.get_absolute_url }}">Comment</a></li>
-                        <li class="post-item">
-                            {% if request.user.is_authenticated %}
-                                <form action="{% url 'vote_posts' slug=post.slug %}" method="POST">
-                                    {% csrf_token %}
-                                        {% if post in request.user.vote_posts.all %}
-                                            <button type="submit" class="btn btn-fail">
-                                            Unvote</button>
-                                        {% else %}
-                                            <button type="submit" class="btn btn-success">Vote</button>
-                                        {% endif %}
-                                </form>
-                            {% endif %}
-                        </li>
-                    </div>
-                </ul>
+    <h3>Posts by humans:</h3>
+    <div class="card">
+        <div class="post-section">
+            {% if posts %}
+            <div class="posts">
+                {% for post in posts %}
+                <div class="individual-post">
+                    <ul class="post">
+                        <div class="post-items">
+                            <li class="post-item"><strong><a href="{{ post.url }}">{{ post.title }}</a></strong></li>
+                            <li class="post-item">{{ post.posted_on }}</li>
+                        </div>
+                        <div class="post-items">
+                            <li class="post-item"><a href="{{ post.get_absolute_url }}">Comment</a></li>
+                            <li class="post-item">
+                                {% if request.user.is_authenticated %}
+                                    <form action="{% url 'vote_posts' slug=post.slug %}" method="POST">
+                                        {% csrf_token %}
+                                            {% if post in request.user.vote_posts.all %}
+                                                <button type="submit" class="btn btn-default">
+                                                Unvote</button>
+                                            {% else %}
+                                                <button type="submit" class="btn btn-success">Vote</button>
+                                            {% endif %}
+                                    </form>
+                                {% endif %}
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+            {% else %}
+            <p>Apparently humans do not care about Robots and their ability to learn art because no posts have been made :(</p>
+            <p>Be the first human to share you knowledge about art with us!!</p>
+            {% endif %}
         </div>
-        {% else %}
-        <p>Apparently humans do not care about Robots and their ability to learn art because no posts have been made :(</p>
-        <p>Be the first human to share you knowledge about art with us!!</p>
-        {% endif %}
     </div>
 
 

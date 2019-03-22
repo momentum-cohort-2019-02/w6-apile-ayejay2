@@ -7,17 +7,19 @@
 <p>posted on: {{ post.posted_on }}</p>
 
 {% if post.comments.count %}
-
+    <h3>Comments:</h3>
     {% for comment in post.comments.all %}
-    <p>Posted by: {{ comment.posted_by }}<br>
-        Comments: {{ comment.text }}</p>
+    <p>
+    {{ comment.posted_by }}: {{ comment.text }}<br>
+    {{ comment.created_at }}
+    </p>
     {% endfor %}
 
 {% endif %}
 
 
 {% if request.user.is_authenticated %}
-    <h2>Comment:</h2>
+    <h3>Comment:</h3>
     <form method="POST" class="post-form">
         {% csrf_token %}
         
