@@ -10,4 +10,9 @@ class CommentForm(forms.ModelForm):
             'text': forms.TextInput(attrs={'style': 'width: 400px'}),
         }
 
+class PostForm(forms.ModelForm):
+
+    class Meta:
+        model = Post
+        fields = ('title', 'url')
 
