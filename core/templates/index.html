@@ -12,6 +12,9 @@
 
     <h2>Posts by humans:</h2>
     <div class="post-section">
+        <div class="new-post">
+            <a href="{% url 'post_new' %}"><span class="glyphicon glyphicon-plus"></span></a>
+        </div>
         {% if posts %}
         <div class="posts">
             {% for post in posts %}
