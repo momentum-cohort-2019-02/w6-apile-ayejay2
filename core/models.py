@@ -3,6 +3,9 @@ import datetime
 from django.utils.text import slugify
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.core.files import File
+import os
+import PIL
 
 
 # Create your models here.
@@ -11,6 +14,9 @@ class Post(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
     url = models.URLField(max_length=255)
     posted_on = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    description = models.CharField(max_length=255, null=True)
+    image_file = models.ImageField(upload_to='images', null=True)
+    image_url = models.URLField(null=True, blank=True)
     #there are many users who will have many votes
     #go to User 
     voted_by = models.ManyToManyField(to=User, related_name='vote_posts', through='Vote')
@@ -46,6 +52,16 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post-detail', args=[str(self.slug)])
+
+    
+    def get_remote_image(self):
+        if self.image_url and not self.image_file:
+            result = urllib.urlretreive(self.image_url)
+            self.image_file.save(
+                os.path.basename(self.image_url),
+                Fil(open(result[0]))
+            )
+        self.save(0)
 
 
 class Comment(models.Model):
