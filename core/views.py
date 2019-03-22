@@ -10,6 +10,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.http import require_http_methods
+from core.forms import CommentForm, PostForm
 
 from .forms import CommentForm
 
@@ -58,3 +59,9 @@ def post_vote_view(request, slug):
         messages.info(request, f"You have redacted your vote for {post.title}.")
         vote.delete()
     return HttpResponseRedirect(next)
+
+@require_http_methods(['POST'])
+@login_required
+def post_new(request):
+    form = PostForm()
+    return render(request, 'post_new.html', {})
