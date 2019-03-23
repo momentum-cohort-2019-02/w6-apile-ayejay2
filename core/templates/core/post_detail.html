@@ -25,16 +25,8 @@
 
 
 {% if request.user.is_authenticated %}
-    <h2>Comment:</h2>
-    <form method="POST" class="post-form">
-        {% csrf_token %}
-        <input type="text">
-        {{ form.as_p }}
-
-        
-            <button type="submit"><i class="fa fa-fort-awesome"></i> Submit</button>
-        
-    </form>
+    <h2><a href="{% url 'create_comment' slug=post.slug %}">Add Comment</h2></a>
+    
 {% endif %}
 
 
