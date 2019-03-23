@@ -71,3 +71,9 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'core/post_new.html', {'form': form})
+
+@login_required
+def post_remove(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    post.delete()
+    return redirect('index')
