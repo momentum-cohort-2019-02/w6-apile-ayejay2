@@ -30,7 +30,7 @@ def index(request):
 class PostDetailView(generic.DetailView):
     model = Post
 
-  
+
 @require_http_methods(['GET', 'POST'])
 @login_required
 def create_comment(request, slug):
@@ -41,6 +41,7 @@ def create_comment(request, slug):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
+            comment.posted_by = request.user
             comment.save()
             return redirect(post.get_absolute_url())
     else:

@@ -2,33 +2,27 @@
 
 {% block content %}
 
-<p>{{ post.title }}<br>
-    {{ post.posted_by }}<br>
-    Image Url:
+<h3>{{ post.title }}</h3>
+    <p>posted by: {{ post.posted_by }}<br> 
+        on {{ post.posted_on }}<br>
+   </p>
+    <p>{{ post.description }}</p>
     {% if post.image_url %}
     <img src="{{ post.image_url }}"><br>
-    {% endif %}</p>
-    
-    <p>{{ post.description }}</p>
+    {% endif %}
 
-<p>posted on: {{ post.posted_on }}</p>
+    {% if request.user.is_authenticated %}
+    <h4><a href="{% url 'create_comment' slug=post.slug %}">Add Comment</h4></a>   
+    {% endif %}
 
-{% if post.comments.count %}
-
-    {% for comment in post.comments.all %}
-    
-    <p>Posted by: {{ comment.posted_by }}<br>
-        Comments: {{ comment.text }}</p>
+    {% if post.comments.count %}
+        <h4>Comments: </h4>
+        {% for comment in post.comments.all %}
+        
+        <p><strong>{{ comment.posted_by }}:</strong> {{ comment.text }}<br>
+        {{ comment.created_at }}</p>
     {% endfor %}
 
-{% endif %}
-
-
-{% if request.user.is_authenticated %}
-    <h2><a href="{% url 'create_comment' slug=post.slug %}">Add Comment</h2></a>
-    
-{% endif %}
-
-
+    {% endif %}
 
 {% endblock %}
