@@ -2,60 +2,80 @@
 
 {% block content %}
 
-    <h1>DataDriven and Generative Art</h1>
+<h1>DataDriven and Generative Art</h1>
 
-    <p> Welcome to DataDriven and Generative Art, a website developed by Robots!</p>
+<p> Welcome to DataDriven and Generative Art, a website developed by Robots!</p>
 
-    <p>We Robots love to see how humans can take data and make it into art using developing. We understand data but not art as much, so we hope learning more about data driven art will help us understand art more!</p>
+<p>We Robots love to see how humans can take data and make it into art using developing. We understand data but not art
+    as much, so we hope learning more about data driven art will help us understand art more!</p>
 
-    <p>Help us learn about art by making posts about the best examples of data driven and generative art that you human can find!</p>
+<p>Help us learn about art by making posts about the best examples of data driven and generative art that you human can
+    find!</p>
 
-    <h2>Posts by humans:</h2>
-    <div class="post-section">
-        {% if posts %}
-        <div class="posts">
-            {% for post in posts %}
-            <div class="individual-post">
-                <ul class="post">
-                    <div class="post-items">
-                        <li class="post-item"><strong><a href="{{ post.url }}">{{ post.title }}</a></strong></li>
-                        <li class="post-item">{{ post.posted_on }}</li>
-                    </div>
-                    <div class="post-items">
-                        <li class="post-item"><a href="{{ post.get_absolute_url }}">{{ post.comments.count }} Comments</a></li>
-                        <li class="post-item">
-                            {% if request.user.is_authenticated %}
-                                <form action="{% url 'vote_posts' slug=post.slug %}" method="POST">
-                                    {% csrf_token %}
-                                        {% if post in request.user.vote_posts.all %}
-                                            <button type="submit" class="btn btn-danger">
-                                            Unvote</button>
-                                        {% else %}
-                                            <button type="submit" class="btn btn-success">Vote</button>
-                                        {% endif %}
-                                </form>
-                            {% endif %}
-                        </li>
-                        <li class="post-item">
-                            {% if request.user.is_authenticated %}
-                            <form action="{% url 'post_remove' slug=post.slug %}" method="POST">
+<h2>Posts by humans:</h2>
+<div class="post-section">
+    {% if posts %}
+    <div class="posts">
+        {% for post in posts %}
+        <div class="individual-post">
+            <ul class="post">
+                <div class="post-items">
+                    <li class="post-item"><strong><a href="{{ post.url }}">{{ post.title }}</a></strong></li>
+                    <li class="post-item">{{ post.posted_on }}</li>
+                </div>
+                <div class="post-items">
+                    <li class="post-item"><a href="{{ post.get_absolute_url }}">{{ post.comments.count }} Comments</a>
+                    </li>
+                    <li class="post-item">
+                        <ul class="votes">
+                            <li class="vote-item num-votes">
+                                {{post.votes.count}} votes
+                            </li>
+                            <form action="{% url 'vote_posts' slug=post.slug %}" method="POST">
+                                {% if request.user.is_authenticated %}
                                 {% csrf_token %}
-                                    {% if request.user == post.posted_by %}
-                                    <button type="submit" class="btn btn-danger"><stong>Delete Post</stong></button>
-                                    {% endif %}
+                                {% if post in request.user.vote_posts.all %}
+                                <li class="vote-item">
+                                    <button type="submit" class="btn">
+                                        <span class="fa-stack fa-2x notart">
+                                            <i class="fa fa-ban fa-stack-2x"></i>
+                                            <i class="fa fa-paint-brush fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </button>
+                                </li>
+                                {% else %}
+                                <li class="vote-item">
+                                    <button type="submit" class="btn art">
+                                        <i class="fa fa-paint-brush fa-inverse fa-2x"></i>
+                                    </button>
+                                </li>
+                                {% endif %}
+                                {% endif %}
                             </form>
+                        </ul>
+                    </li>
+                    <li class="post-item">
+                        <form action="{% url 'post_remove' slug=post.slug %}" method="POST">
+                            {% if request.user.is_authenticated %}
+                            {% csrf_token %}
+                            {% if request.user == post.posted_by %}
+                            <button type="submit" class="btn btn-danger">
+                                <stong>Delete Post</stong>
+                            </button>
                             {% endif %}
-                        </li>
-                    </div>
-                </ul>
-            </div>
-            {% endfor %}
+                        </form>
+                        {% endif %}
+                    </li>
+                </div>
+            </ul>
         </div>
-        {% else %}
-        <p>Apparently humans do not care about Robots and their ability to learn art because no posts have been made :(</p>
-        <p>Be the first human to share you knowledge about art with us!!</p>
-        {% endif %}
+        {% endfor %}
     </div>
+    {% else %}
+    <p>Apparently humans do not care about Robots and their ability to learn art because no posts have been made :(</p>
+    <p>Be the first human to share you knowledge about art with us!!</p>
+    {% endif %}
+</div>
 
 
 {% endblock %}
