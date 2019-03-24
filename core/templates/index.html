@@ -28,12 +28,22 @@
                                 <form action="{% url 'vote_posts' slug=post.slug %}" method="POST">
                                     {% csrf_token %}
                                         {% if post in request.user.vote_posts.all %}
-                                            <button type="submit" class="btn btn-fail">
+                                            <button type="submit" class="btn btn-danger">
                                             Unvote</button>
                                         {% else %}
                                             <button type="submit" class="btn btn-success">Vote</button>
                                         {% endif %}
                                 </form>
+                            {% endif %}
+                        </li>
+                        <li class="post-item">
+                            {% if request.user.is_authenticated %}
+                            <form action="{% url 'post_remove' slug=post.slug %}" method="POST">
+                                {% csrf_token %}
+                                    {% if request.user == post.posted_by %}
+                                    <button type="submit" class="btn btn-danger"><stong>Delete Post</stong></button>
+                                    {% endif %}
+                            </form>
                             {% endif %}
                         </li>
                     </div>
