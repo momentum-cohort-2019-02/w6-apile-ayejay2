@@ -19,6 +19,34 @@
         on {{ post.posted_on }}<br>
    </p>
     <p>{{ post.description }}</p>
+    <div class="post-item">
+            <ul class="votes">
+                <li class="vote-item num-votes">
+                    {{post.votes.count}} votes
+                </li>
+                <form action="{% url 'vote_posts' slug=post.slug %}" method="POST">
+                    {% if request.user.is_authenticated %}
+                    {% csrf_token %}
+                    {% if post in request.user.vote_posts.all %}
+                    <li class="vote-item">
+                        <button type="submit" class="btn">
+                            <span class="fa-stack fa-2x notart">
+                                <i class="fa fa-ban fa-stack-2x"></i>
+                                <i class="fa fa-paint-brush fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </button>
+                    </li>
+                    {% else %}
+                    <li class="vote-item">
+                        <button type="submit" class="btn art">
+                            <i class="fa fa-paint-brush fa-inverse fa-2x"></i>
+                        </button>
+                    </li>
+                    {% endif %}
+                    {% endif %}
+                </form>
+            </ul>
+        </div>
     {% if post.image_url %}
     <img src="{{ post.image_url }}"><br>
     {% endif %}
