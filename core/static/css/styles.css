@@ -17,3 +17,34 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+.votes{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+}
+
+.vote-item{
+    padding-right: .25rem;
+}
+
+.num{
+    padding: .50rem;
+}
+
+.btn{
+    background-color: rgb(0, 145, 255);
+}
+
+.notart{
+    font-size: .75rem;
+}
+.art{
+    font-size: .50rem;
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+}

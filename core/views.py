@@ -16,16 +16,13 @@ from django.db.models import Max
 
 
 def index(request):
-
-    posts = Post.objects.all()
     comments = Comment.objects.all()
     votes = Vote.objects.all()
-    vote_count = Post.objects.all().annotate(last_vote_date=Max('votes__voted_at')).order_by('-last_vote_date')
+    posts = Post.objects.all().annotate(last_vote_date=Max('votes__voted_at')).order_by( 'last_vote_date')
     context = {
         'posts': posts,
         'comments': comments,
         'votes': votes,
-        'vote_count': vote_count,
     }
     return render(request, 'index.html', context=context)
 

@@ -28,10 +28,27 @@
                                 <form action="{% url 'vote_posts' slug=post.slug %}" method="POST">
                                     {% csrf_token %}
                                         {% if post in request.user.vote_posts.all %}
-                                            <button type="submit" class="btn btn-danger">
-                                            Unvote</button>
+                                        <ul class="votes">
+                                            <li></li>
+                                            <li class="vote-item num">{{ post.votes.count }} votes</li>
+                                            <li class="vote-item">
+                                                <button type="submit" class="btn">
+                                                    <span class="fa-stack fa-2x notart">
+                                                        <i class="fa fa-ban fa-stack-2x"></i>
+                                                        <i class="fa fa-paint-brush fa-stack-1x fa-inverse"></i>
+                                                    </span>
+                                                </button>
+                                            </li>
+                                        </ul>
                                         {% else %}
-                                            <button type="submit" class="btn btn-success">Vote</button>
+                                        <ul class="votes">
+                                            <li class="vote-item num">{{ post.votes.count }} votes</li>
+                                            <li class="vote-item">
+                                                <button type="submit" class="btn art">
+                                                    <i class="fa fa-paint-brush fa-inverse fa-2x"></i>
+                                                </button>
+                                            </li>
+                                        </ul>
                                         {% endif %}
                                 </form>
                             {% endif %}
@@ -45,7 +62,6 @@
                                     {% endif %}
                             </form>
                             {% endif %}
-                        </li>
                     </div>
                 </ul>
             </div>

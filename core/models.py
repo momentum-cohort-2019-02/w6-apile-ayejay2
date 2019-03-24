@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.core.files import File
 import os
 import PIL
+import turtle
 
 
 # Create your models here.
@@ -23,8 +24,6 @@ class Post(models.Model):
     posted_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts', default=1)
 
 
-    class Meta:
-        ordering = ['-posted_on']
     
 
     def save(self, *args, **kwargs):
@@ -81,5 +80,5 @@ class Comment(models.Model):
 class Vote(models.Model):
     """Model representing a vote."""
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name='votes', on_delete=models.CASCADE)
     voted_at = models.DateTimeField(auto_now_add=True)
