@@ -12,13 +12,13 @@ from django.utils.text import slugify
 # Create your views here.
 from core.forms import CommentForm, PostForm
 from core.models import Post, Comment, Vote
-from django.db.models import Max
+from django.db.models import Max, Count
 
 
 def index(request):
     comments = Comment.objects.all()
     votes = Vote.objects.all()
-    posts = Post.objects.all().annotate(last_vote_date=Max('votes__voted_at')).order_by( 'last_vote_date')
+    posts = Post.objects.all().annotate(num_of_votes=Count('votes')).order_by('-num_of_votes', '-posted_on')
     context = {
         'posts': posts,
         'comments': comments,
