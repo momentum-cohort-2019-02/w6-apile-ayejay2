@@ -54,18 +54,6 @@
                             </form>
                         </ul>
                     </li>
-                    <li class="post-item">
-                        <form action="{% url 'post_remove' slug=post.slug %}" method="POST">
-                            {% if request.user.is_authenticated %}
-                            {% csrf_token %}
-                            {% if request.user == post.posted_by %}
-                            <button type="submit" class="btn btn-danger">
-                                <stong>Delete Post</stong>
-                            </button>
-                            {% endif %}
-                        </form>
-                        {% endif %}
-                    </li>
                 </div>
             </ul>
         </div>
@@ -76,6 +64,24 @@
     <p>Be the first human to share you knowledge about art with us!!</p>
     {% endif %}
 </div>
+
+<div>
+        <span>
+            {% if posts.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ posts.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+            </span>
+    
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}">next</a>
+                <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+      </div>
 
 
 {% endblock %}

@@ -3,10 +3,50 @@
 {% block content %}
 
 <h3>{{ post.title }}</h3>
-    <p>posted by: {{ post.posted_by }}<br> 
+
+    <p>posted by: {{ post.posted_by }}
+            <form action="{% url 'post_remove' slug=post.slug %}" method="POST">
+                {% if request.user.is_authenticated %}
+                {% csrf_token %}
+                    {% if request.user == post.posted_by %}
+                    <button type="submit" class="btn btn-danger">
+                        <stong>Delete Post</stong>
+                    </button>
+                    {% endif %}
+                {% endif %}
+            </form>
+        <br> 
         on {{ post.posted_on }}<br>
    </p>
     <p>{{ post.description }}</p>
+    <div class="post-item">
+            <ul class="votes">
+                <li class="vote-item num-votes">
+                    {{post.votes.count}} votes
+                </li>
+                <form action="{% url 'vote_posts' slug=post.slug %}" method="POST">
+                    {% if request.user.is_authenticated %}
+                    {% csrf_token %}
+                    {% if post in request.user.vote_posts.all %}
+                    <li class="vote-item">
+                        <button type="submit" class="btn">
+                            <span class="fa-stack fa-2x notart">
+                                <i class="fa fa-ban fa-stack-2x"></i>
+                                <i class="fa fa-paint-brush fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </button>
+                    </li>
+                    {% else %}
+                    <li class="vote-item">
+                        <button type="submit" class="btn art">
+                            <i class="fa fa-paint-brush fa-inverse fa-2x"></i>
+                        </button>
+                    </li>
+                    {% endif %}
+                    {% endif %}
+                </form>
+            </ul>
+        </div>
     {% if post.image_url %}
     <img src="{{ post.image_url }}"><br>
     {% endif %}

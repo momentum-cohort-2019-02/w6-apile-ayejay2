@@ -13,12 +13,18 @@ from django.utils.text import slugify
 from core.forms import CommentForm, PostForm
 from core.models import Post, Comment, Vote
 from django.db.models import Max, Count
+from django.core.paginator import Paginator
 
 
 def index(request):
     comments = Comment.objects.all()
     votes = Vote.objects.all()
     posts = Post.objects.all().annotate(num_of_votes=Count('votes')).order_by('-num_of_votes', '-posted_on')
+
+    paginator = Paginator(posts, 20)
+    page = request.GET.get('page', 1)
+    posts = paginator.get_page(page)
+
     context = {
         'posts': posts,
         'comments': comments,
@@ -26,6 +32,10 @@ def index(request):
     }
     return render(request, 'index.html', context=context)
 
+def about(request):
+    template = 'core/the_story.html'
+    
+    return render(request, template)
 class PostDetailView(generic.DetailView):
     model = Post
 
