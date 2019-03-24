@@ -7,13 +7,14 @@ from django.contrib import messages
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.views.decorators.http import require_http_methods
-from core.forms import CommentForm, PostForm
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 # Create your views here.
+from core.forms import CommentForm, PostForm
+from core.models import Post, Comment, Vote
+
+
+
 def index(request):
 
     posts = Post.objects.all()
@@ -29,21 +30,26 @@ def index(request):
 class PostDetailView(generic.DetailView):
     model = Post
 
-### TODO: in production --------------------->   
 
-def create_comment(request):
-    if request.method == "POST":
+@require_http_methods(['GET', 'POST'])
+@login_required
+def create_comment(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    
+    if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
+            comment.post = post
             comment.posted_by = request.user
-            comment.created_at = timezone.now()
             comment.save()
-            return redirect('post-detail', pk=post.pk)
+            return redirect(post.get_absolute_url())
     else:
         form = CommentForm()
-    return render(request, 'post_detail.html', {'form': form})
-### TODO: In Production ------------------------------> ^^^^^
+    template = 'core/add_comment.html'
+    context = {'form': form}
+    return render(request, template, context)
+
 
 @require_http_methods(['POST'])
 @login_required
