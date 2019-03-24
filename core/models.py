@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from django.core.files import File
 import os
 import PIL
-import turtle
 
 
 # Create your models here.
