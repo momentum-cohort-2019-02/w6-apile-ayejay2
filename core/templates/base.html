@@ -24,6 +24,7 @@
                 {% block sidebar %}
                     <ul class="sidebar-nav">
                         <li><a href="{% url 'index' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
                         {% if request.user.is_authenticated %}
                         <li>{{ user.username }}</li>
                         <li><a href="{% url 'post_new' %}"><span class="glyphicon glyphicon-plus">New Post</span></a></li>

@@ -24,7 +24,7 @@ def index(request):
     paginator = Paginator(posts, 20)
     page = request.GET.get('page', 1)
     posts = paginator.get_page(page)
-    
+
     context = {
         'posts': posts,
         'comments': comments,
@@ -32,6 +32,10 @@ def index(request):
     }
     return render(request, 'index.html', context=context)
 
+def about(request):
+    template = 'core/the_story.html'
+    
+    return render(request, template)
 class PostDetailView(generic.DetailView):
     model = Post
 
