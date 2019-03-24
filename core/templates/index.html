@@ -40,9 +40,7 @@
                             {% if request.user.is_authenticated %}
                             <form action="{% url 'post_remove' slug=post.slug %}" method="POST">
                                 {% csrf_token %}
-                                    {% if user in request.user.post_remove.all %}
-                                    <button type="submit" class="btn btn-detail">You deleted your Post</button>
-                                    {% else %}
+                                    {% if request.user == post.posted_by %}
                                     <button type="submit" class="btn btn-danger"><stong>Delete Post</stong></button>
                                     {% endif %}
                             </form>
