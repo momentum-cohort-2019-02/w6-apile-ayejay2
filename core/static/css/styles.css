@@ -57,3 +57,27 @@
     padding: .45rem;
     box-shadow: 3px 3px #dcdcdc;
 }
+
+#id_title{
+    border-radius: 5px;
+    color:#b500fc;
+}
+
+#id_url{
+    border-radius: 5px;
+    color:#b500fc;
+}
+
+#id_description{
+    border-radius: 5px;
+    color:#b500fc;
+}
+
+#id_image_url{
+    border-radius: 5px;
+    color:#b500fc;
+}
+
+label{
+    font-weight: 600;
+}
