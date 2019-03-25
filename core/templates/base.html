@@ -16,29 +16,43 @@
     </head>
     <body>
         <header>
-            <h1>Generative and Data Driven Art</h1>
+            <svg viewBox="0 0 960 300">
+                <symbol id="s-text">
+                    <text text-anchor="middle" x="50%" y="80%">GenArt</text>
+                </symbol>
+            
+                <g class = "g-ants">
+                    <use xlink:href="#s-text" class="text-copy"></use>
+                    <use xlink:href="#s-text" class="text-copy"></use>
+                    <use xlink:href="#s-text" class="text-copy"></use>
+                    <use xlink:href="#s-text" class="text-copy"></use>
+                    <use xlink:href="#s-text" class="text-copy"></use>
+                </g>
+            </svg>
+            <h3>DataDriven and Generative Art</h3>
         </header>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-2">
                 {% block sidebar %}
                     <ul class="sidebar-nav">
-                        <li><a href="{% url 'index' %}">Home</a></li>
-                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li class="home"><i class="fa fa-home"></i><a href="{% url 'index' %}"> Home</a></li>
+                        <li class="story"><i class="fa fa-book"></i><a href="{% url 'about' %}"> About</a></li>
                         {% if request.user.is_authenticated %}
-                        <li>{{ user.username }}</li>
-                        <li><a href="{% url 'post_new' %}"><span class="glyphicon glyphicon-plus">New Post</span></a></li>
+                        <li class="user"><i class="fa fa-user"></i> {{ user.username }}</li>
+                        <li class="new_post"><i class="fa fa-pencil-square-o"></i><a href="{% url 'post_new' %}"> New Post</a></li>
 
-                        <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+                        <li class="log"><i class="fa fa-times"></i><a href="{% url 'auth_logout' %}"> Logout</a></li>
                         {% else %}
-                        <li><a href="{% url 'auth_login' %}">Register / Login</a></li>
+                        <li class="log"><i class="fa fa-user"></i><a href="{% url 'auth_login' %}"> Register / Login</a></li>
                         {% endif %}
                     </ul>
                 {% endblock %}
                 </div>
-                <div class="col-sm-10 ">
-                {% block content %}{% endblock %}
-                
+                <div class="col-sm-10">
+                    <div class="block-content">
+                    {% block content %}{% endblock %}
+                    </div>
                 </div>
 
             </div>
