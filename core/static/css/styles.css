@@ -35,16 +35,19 @@
 }
 
 .btn{
-    background-color: rgb(0, 145, 255);
+    padding: 0;
+    border-radius: 10px;
 }
 
 .notart{
-    font-size: .75rem;
+    background-color: #0091fc;
+    font-size: .50rem;
+    box-shadow: 3px 3px #dcdcdc;
+    padding: .30rem 0 .30rem 0;
 }
 .art{
+    background-color: #fcd600;
     font-size: .50rem;
-    padding-right: 1.25rem;
-    padding-left: 1.25rem;
-    padding-top: .75rem;
-    padding-bottom: .75rem;
+    padding: .45rem;
+    box-shadow: 3px 3px #dcdcdc;
 }
