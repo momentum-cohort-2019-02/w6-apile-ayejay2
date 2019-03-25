@@ -5,6 +5,9 @@
     <form method="POST" class="post-form">
         {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="save btn btn-default">Submit art exmple</button>
+            <button type="submit" class="btn fa-inverse submit-post">
+                    <i class="fa fa-paper-plane"></i> Submit new example
+            </button>
+
     </form>
 {% endblock %}
