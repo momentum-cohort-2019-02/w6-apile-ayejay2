@@ -53,7 +53,7 @@
 }
 
 .submit-post{
-    background-color: #00fc69;
+    background-color: #b500fc;
     padding: .45rem;
     box-shadow: 3px 3px #dcdcdc;
 }
@@ -80,4 +80,16 @@
 
 label{
     font-weight: 600;
+}
+
+#id_text{
+    border-radius: 5px;
+    color:#3700fc;
+    box-shadow: 3px 3px #dcdcdc;
+}
+.comment_new{
+    border-radius: 5px;
+    background-color: #3700fc;
+    box-shadow: 3px 3px #dcdcdc;
+    padding: .25rem;
 }

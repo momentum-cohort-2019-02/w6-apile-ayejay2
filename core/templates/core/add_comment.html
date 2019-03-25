@@ -5,6 +5,6 @@
     <form method='POST'>
         {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Submit comment</button>
+            <button type="submit" class="comment_new fa-inverse"><i class="fa fa-paper-plane"></i> Submit comment</button>
     </form>
 {% endblock %}
