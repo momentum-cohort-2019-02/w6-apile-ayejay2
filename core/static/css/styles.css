@@ -130,3 +130,30 @@ label{
 .add-comment-url{
     color: whitesmoke;
 }
+
+input{
+    border-radius: 5px;
+}
+
+#id_username{
+    border-radius: 5px;
+    color:#3700fc;
+    box-shadow: 3px 3px #dcdcdc;
+}
+#id_email{
+    border-radius: 5px;
+    color:#3700fc;
+    box-shadow: 3px 3px #dcdcdc;
+}
+
+#id_password{
+    border-radius: 5px;
+    color:#3700fc;
+    box-shadow: 3px 3px #dcdcdc;
+}
+
+#id_password2{
+    border-radius: 5px;
+    color:#3700fc;
+    box-shadow: 3px 3px #dcdcdc;
+}

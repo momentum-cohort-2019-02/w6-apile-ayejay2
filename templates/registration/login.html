@@ -5,10 +5,11 @@
 <form method="POST" action="">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Log in"/>
+    <input type="submit" value="Log in"/><i class="fa fa-sign-in"></i>
     <input type="hidden" value="{{ next }}"/>
 </form>
-<p>Shoot, what was my password again?<a href="{% url 'auth_password_reset' %}">Reset it</a>!</p>
-<p>Want to become a member?<a href="{% url 'registration_register' %}">Become a member</a>!</p>
+<br>
+<p>Shoot, you forgot your password again? Very human of you. <a href="{% url 'auth_password_reset' %}">Reset it</a>!</p>
+<p>Want to become a member? <a href="{% url 'registration_register' %}">Become a member</a>!</p>
 
 {% endblock %}
