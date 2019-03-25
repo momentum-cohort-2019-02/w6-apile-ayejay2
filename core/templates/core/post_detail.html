@@ -3,56 +3,58 @@
 {% block content %}
 
 <h3>{{ post.title }}</h3>
-
-    <p>posted by: {{ post.posted_by }}
-            <form action="{% url 'post_remove' slug=post.slug %}" method="POST">
-                {% if request.user.is_authenticated %}
-                {% csrf_token %}
-                    {% if request.user == post.posted_by %}
-                    <button type="submit" class="btn btn-danger">
-                        <stong>Delete Post</stong>
-                    </button>
-                    {% endif %}
+<div class="image-center">
+{% if post.image_url %}
+<img class="post-image" src="{{ post.image_url }}"><br>
+{% endif %}
+</div>
+<div class="post-information">
+    <p class="posted_by">Posted by <strong>{{ post.posted_by }}</strong> on <strong>{{ post.posted_on }} </strong></p>
+        <form action="{% url 'post_remove' slug=post.slug %}" method="POST">
+            {% if request.user.is_authenticated %}
+            {% csrf_token %}
+                {% if request.user == post.posted_by %}
+                <button type="submit" class="btn delete-post fa-inverse">
+                    <i class="fa fa-pencil"></i>Delete Post
+                </button>
                 {% endif %}
-            </form>
-        <br> 
-        on {{ post.posted_on }}<br>
-   </p>
-    <p>{{ post.description }}</p>
-    <div class="post-item">
-            <ul class="votes">
+            {% endif %}
+        </form>
+        <div class="post-item">
+            <ul class="votes post-detail">
                 <li class="vote-item num-votes">
                     {{post.votes.count}} votes
                 </li>
-                <form action="{% url 'vote_posts' slug=post.slug %}" method="POST">
-                    {% if request.user.is_authenticated %}
-                    {% csrf_token %}
-                    {% if post in request.user.vote_posts.all %}
-                    <li class="vote-item">
-                        <button type="submit" class="btn">
-                            <span class="fa-stack fa-2x notart">
-                                <i class="fa fa-ban fa-stack-2x"></i>
-                                <i class="fa fa-paint-brush fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </button>
-                    </li>
-                    {% else %}
-                    <li class="vote-item">
-                        <button type="submit" class="btn art">
-                            <i class="fa fa-paint-brush fa-inverse fa-2x"></i>
-                        </button>
-                    </li>
-                    {% endif %}
-                    {% endif %}
-                </form>
+                <li class="vote-item">
+                    <form action="{% url 'vote_posts' slug=post.slug %}" method="POST">
+                        {% if request.user.is_authenticated %}
+                        {% csrf_token %}
+                        {% if post in request.user.vote_posts.all %}
+                        <li class="vote-item">
+                            <button type="submit" class="btn notart">
+                                <span class="fa-stack fa-1x">
+                                    <i class="fa fa-ban fa-stack-1x"></i>
+                                    <i class="fa fa-paint-brush fa-stack-0.5x fa-inverse"></i>
+                                </span>
+                            </button>
+                        </li>
+                        {% else %}
+                        <li class="vote-item">
+                            <button type="submit" class="btn art">
+                                <i class="fa fa-paint-brush fa-inverse fa-2x"></i>
+                            </button>
+                        </li>
+                        {% endif %}
+                        {% endif %}
+                    </form>
+                </li>
             </ul>
         </div>
-    {% if post.image_url %}
-    <img src="{{ post.image_url }}"><br>
-    {% endif %}
-
+</div>
+    <p>{{ post.description }}</p>
+    
     {% if request.user.is_authenticated %}
-    <h4><a href="{% url 'create_comment' slug=post.slug %}">Add Comment</h4></a>   
+    <button class="fa-inverse add-comment"><i class="fa fa-comment"></i><a class="add-comment-url" href="{% url 'create_comment' slug=post.slug %}"> Add Comment</a></button>
     {% endif %}
 
     {% if post.comments.count %}
