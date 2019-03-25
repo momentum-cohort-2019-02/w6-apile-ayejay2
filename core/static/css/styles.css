@@ -93,3 +93,40 @@ label{
     box-shadow: 3px 3px #dcdcdc;
     padding: .25rem;
 }
+
+.delete-post{
+    border-radius: 5px;
+    background-color: #fc0047;
+    box-shadow: 3px 3px #dcdcdc;
+    padding: .35rem;
+}
+
+.post-image{
+    width: 30%;
+    box-shadow: 3px 3px #dcdcdc;
+    border-radius: 5px;
+    margin: 2rem 5rem 2rem 5rem;
+}
+
+.post-information{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: base-line;
+}
+
+.votes.post-detail{
+    display: flex;
+    flex-direction: row;
+    align-items: base-line;
+}
+.add-comment{
+    border-radius: 5px;
+    background-color: #3700fc;
+    box-shadow: 3px 3px #dcdcdc;
+    padding: .25rem;
+}
+
+.add-comment-url{
+    color: whitesmoke;
+}
