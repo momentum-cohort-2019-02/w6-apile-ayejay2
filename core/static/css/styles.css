@@ -1,15 +1,104 @@
 .sidebar-nav {
-    margin-top: 20px;
+    /* margin-top: 20px; */
     padding: 0;
     list-style: none;
-    border-right: solid 2px rgb(141, 138, 138);
+    background-color: #fcfcfc;
+    border-radius: 0 0 15px 0;
+    box-shadow: -4px 4px rgb(134, 134, 134);
+}
+
+.sidebar-nav li {
+    border-bottom: solid 1px black;
+    border-radius: 0 0 15px 0;
+    font-size: 1.25rem;
+    padding-left: 10px;
+}
+
+.home:hover {
+    background-image: linear-gradient(#FC9700, #fc5800);
+}
+
+.story:hover {
+    background-image: linear-gradient(#0091FC,  #3700FC);
+}
+
+.user:hover {
+    background-image: linear-gradient(#00FC69,  #017230);
+}
+
+.new_post:hover {
+    background-image: linear-gradient(#B500FC,  #4b0168);
+}
+
+.log:hover {
+    background-image: linear-gradient(#FCD600,  #8d7801);
+}
+
+.col-sm-2 {
+    padding: 0;
+    margin: 0;
+}
+header {
+    background-image: radial-gradient( #000000, #616060);
+    box-shadow: 2px 2px rgb(134, 134, 134);
+    border-radius: 0 0 30px 0;
+}
+
+body {
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #b5b5b5;
+}
+
+h3 {
+    background-color: #fcfcfc;
+    color: black;
+    font-size: 2.5em;
+    margin-top: 0;
+    text-align: center;
+    border-radius: 0 0 30px 0;
+    box-shadow: -4px 4px rgb(134, 134, 134);
+}
+
+h4 {
+    background-color:#ffffff;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.block-text {
+    font-size: 1.25em;
+    border: solid 1px rgb(180, 177, 177);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color:#fcfcfc;
+    box-shadow: -4px 4px rgb(134, 134, 134);
+}
+
+.block-text p {
+    max-width: 85%;
+    padding-left: 10px;
+}
+
+.block-content {
+    width: 98%;
 }
 
 .post{
     list-style: none;
     display: flex;
     flex-direction: column;
-    width: 75%;
+    border: dashed 1px rgb(180, 177, 177);
+    box-shadow: -4px 4px rgba(141, 138, 138, 0.644);
+    border-radius: 10px;
+    padding: 10px 10px 10px 10px; 
+    background-color:#d6d6d6;
+}
+
+.post:hover {
+    transform: translateY(4px);
+    background-color:#ffffff;
 }
 
 .post-items{
@@ -35,8 +124,9 @@
 }
 
 .btn{
+    background-color: rgb(0, 145, 255);
+    border-radius: 30px;
     padding: 0;
-    border-radius: 10px;
 }
 
 .notart{
@@ -157,3 +247,52 @@ input{
     color:#3700fc;
     box-shadow: 3px 3px #dcdcdc;
 }
+
+/* Magically plugged this in from codepen and it works: https://codepen.io/ClaireLarsen/pen/XmVyVX/ */
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+
+svg {
+    display: block;
+    font: 18.5em 'Montserrat';
+    /* width: 960px;
+    height: 300px; */
+    margin: 0 auto;
+}
+
+.text-copy {
+    fill: none;
+    stroke: rgb(255, 255, 255);
+    stroke-dasharray: 6% 29%;
+    stroke-width: 5px;
+    stroke-dashoffset: 0%;
+    animation: stroke-offset 5.5s infinite linear;
+}
+
+.text-copy:nth-child(1){
+	stroke: #3700FC;
+	animation-delay: -1;
+}
+
+.text-copy:nth-child(2){
+	stroke: #FC0047;
+	animation-delay: -2s;
+}
+
+.text-copy:nth-child(3){
+	stroke: #B500FC;;
+	animation-delay: -3s;
+}
+
+.text-copy:nth-child(4){
+	stroke: #FC5800;
+	animation-delay: -4s;
+}
+
+.text-copy:nth-child(5){
+	stroke: #FCD600;
+	animation-delay: -5s;
+}
+
+@keyframes stroke-offset{
+    100% {stroke-dashoffset: -35%;}
